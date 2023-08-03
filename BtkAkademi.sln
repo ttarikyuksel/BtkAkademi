@@ -5,7 +5,11 @@ VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BtkAkademi", "BtkAkademi\BtkAkademi.csproj", "{12541EC5-965A-4EA0-A8D4-E228CB40E1C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreApp", "StoreApp\StoreApp.csproj", "{F82A6C83-1D39-4943-B0F2-48D4C4B4F64F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoreApp", "StoreApp\StoreApp.csproj", "{F82A6C83-1D39-4943-B0F2-48D4C4B4F64F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Project1", "Project1", "{AFD89640-0A81-4E55-93B0-0E1C89E2D55E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Project2", "Project2", "{21C06DD4-D095-481D-87DA-0E319CC466EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,6 +28,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{12541EC5-965A-4EA0-A8D4-E228CB40E1C8} = {AFD89640-0A81-4E55-93B0-0E1C89E2D55E}
+		{F82A6C83-1D39-4943-B0F2-48D4C4B4F64F} = {21C06DD4-D095-481D-87DA-0E319CC466EB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F1376C76-8F38-4BEF-BCB9-99DF97642C2E}
