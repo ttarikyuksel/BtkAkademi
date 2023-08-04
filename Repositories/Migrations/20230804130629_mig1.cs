@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace StoreApp.Migrations
+namespace Repositories.Migrations
 {
     public partial class mig1 : Migration
     {
@@ -20,6 +20,18 @@ namespace StoreApp.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Products", x => x.Id);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "Id", "Price", "ProductName" },
+                values: new object[,]
+                {
+                    { 1, 17000m, "Computer" },
+                    { 2, 1000m, "Keyboard" },
+                    { 3, 500m, "Mouse" },
+                    { 4, 7000m, "Monitor" },
+                    { 5, 1500m, "Deck" }
                 });
         }
 
