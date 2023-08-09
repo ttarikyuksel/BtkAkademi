@@ -15,6 +15,7 @@ namespace Repositories
 
         }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -28,6 +29,12 @@ namespace Repositories
                 new Product() { Id = 4, ProductName = "Monitor", Price = 7_000 },
                 new Product() { Id = 5, ProductName = "Deck", Price = 1_500 }
             );
+
+            modelBuilder.Entity<Category>()
+             .HasData(
+                new Category() { CategoryId=1,CategoryName="Book"},
+                new Category() { CategoryId=2,CategoryName="Electronic"}               
+              );
         }
 
     }
