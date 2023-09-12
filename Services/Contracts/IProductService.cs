@@ -12,6 +12,7 @@ namespace Services.Contracts
     {
         IEnumerable<Product> GetAllProducts(bool trackChanges);
         Product? GetOneProduct(int id, bool trackChanges);
-
+        void CrateProduct(Product product);
+        void UpdateOneProduct(Product product);
     }
 }

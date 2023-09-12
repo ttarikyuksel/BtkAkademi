@@ -18,6 +18,12 @@ namespace Services
             _manager = manager;
         }
 
+        public void CrateProduct(Product product)
+        {
+            _manager.Product.CreateProduct(product);
+            _manager.Save();
+        }
+
         public IEnumerable<Product> GetAllProducts(bool trackChanges)
         {
             return _manager.Product.GetAllProducts(trackChanges);
@@ -29,6 +35,14 @@ namespace Services
             if (product is null)
                 throw new Exception("Product Not Found!");
             return _manager.Product.GetOneProduct(id, trackChanges);
+        }
+
+        public void UpdateOneProduct(Product product)
+        {
+            var entity = _manager.Product.GetOneProduct(product.Id,true);
+            entity.ProductName = product.ProductName;
+            entity.Price = product.Price;
+            _manager.Save();
         }
     }
 }
