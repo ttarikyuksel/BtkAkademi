@@ -11,7 +11,7 @@ using Repositories;
 namespace Repositories.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20230912173545_mig1")]
+    [Migration("20230913101948_mig1")]
     partial class mig1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -63,6 +63,7 @@ namespace Repositories.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("ProductName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

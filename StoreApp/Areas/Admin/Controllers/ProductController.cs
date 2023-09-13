@@ -1,5 +1,6 @@
 ﻿using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Services.Contracts;
 
 namespace StoreApp.Areas.Admin.Controllers
@@ -22,6 +23,7 @@ namespace StoreApp.Areas.Admin.Controllers
 
         public IActionResult Create()
         {
+            ViewBag.Categories = new SelectList(_manager.CategoryService.GetAllCategoeris(false), "CategoryId", "CategoryName", 1);
             return View();
         }
 
@@ -51,6 +53,13 @@ namespace StoreApp.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult Delete([FromRoute(Name ="id")]int id)
+        {
+            _manager.ProductService.DeleteOneProduct(id);
+            return RedirectToAction("Index");
         }
     }
 }
