@@ -1,4 +1,6 @@
-﻿using Entities.Models;
+﻿using AutoMapper;
+using Entities.Dtos;
+using Entities.Models;
 using Repositories.Contracts;
 using Services.Contracts;
 using System;
@@ -12,15 +14,18 @@ namespace Services
     public class ProductManager : IProductService
     {
         private readonly IRepositoryManager _manager;
+        private readonly IMapper _mapper;
 
-        public ProductManager(IRepositoryManager manager)
+        public ProductManager(IRepositoryManager manager, IMapper mapper)
         {
             _manager = manager;
+            _mapper = mapper;
         }
 
-        public void CrateProduct(Product product)
+        public void CrateProduct(ProductDtoForInsertion productDto)
         {
-            _manager.Product.CreateOneProduct(product);
+            Product product = _mapper.Map<Product>(productDto);
+            _manager.Product.Create(product);
             _manager.Save();
         }
 
@@ -48,11 +53,21 @@ namespace Services
             return _manager.Product.GetOneProduct(id, trackChanges);
         }
 
-        public void UpdateOneProduct(Product product)
+        public ProductDtoForUpdate GetOneProductForUpdate(int id, bool trakcChanges)
         {
-            var entity = _manager.Product.GetOneProduct(product.Id, true);
-            entity.ProductName = product.ProductName;
-            entity.Price = product.Price;
+            var product = GetOneProduct(id, trakcChanges);
+            var productDto = _mapper.Map<ProductDtoForUpdate>(product);
+            return productDto;
+        }
+
+        public void UpdateOneProduct(ProductDtoForUpdate productDto)
+        {
+            //var entity = _manager.Product.GetOneProduct(productDto.Id, true);
+            //entity.ProductName = productDto.ProductName;
+            //entity.Price = productDto.Price;
+            //entity.CategoryId = productDto.CategoryId;
+            var entity = _mapper.Map<Product>(productDto);
+            _manager.Product.UpdateOneProduct(entity);
             _manager.Save();
         }
     }

@@ -25,6 +25,8 @@ namespace Repositories
         {
             return FindByCondition(p => p.Id.Equals(id), trackChanges);
         }
+
+        public void UpdateOneProduct(Product entity) => Update(entity);
         
     }
 }
