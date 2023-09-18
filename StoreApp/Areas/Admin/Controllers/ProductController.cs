@@ -30,21 +30,31 @@ namespace StoreApp.Areas.Admin.Controllers
 
         private SelectList GetCategoriesSelectList()
         {
-             return new SelectList(_manager.CategoryService.GetAllCategoeris(false), "CategoryId", "CategoryName", 1);
+            return new SelectList(_manager.CategoryService.GetAllCategoeris(false), "CategoryId", "CategoryName", 1);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([FromForm] ProductDtoForInsertion productDto)
+        public async Task<IActionResult> Create([FromForm] ProductDtoForInsertion productDto, IFormFile file)
         {
-            if(ModelState.IsValid) {
+            if (ModelState.IsValid)
+            {
+
+                string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", file.FileName);
+
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+
+                productDto.ImageUrl = String.Concat("/images/", file.FileName);
                 _manager.ProductService.CrateProduct(productDto);
                 return RedirectToAction("Index");
             }
             return View();
         }
 
-        public IActionResult Update([FromRoute(Name ="id")] int id)
+        public IActionResult Update([FromRoute(Name = "id")] int id)
         {
             ViewBag.Categories = GetCategoriesSelectList();
             var model = _manager.ProductService.GetOneProductForUpdate(id, false);
@@ -52,7 +62,7 @@ namespace StoreApp.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Update([FromForm]ProductDtoForUpdate product)
+        public IActionResult Update([FromForm] ProductDtoForUpdate product)
         {
             if (ModelState.IsValid)
             {
@@ -63,7 +73,7 @@ namespace StoreApp.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public IActionResult Delete([FromRoute(Name ="id")]int id)
+        public IActionResult Delete([FromRoute(Name = "id")] int id)
         {
             _manager.ProductService.DeleteOneProduct(id);
             return RedirectToAction("Index");
