@@ -1,3 +1,4 @@
+using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Repositories;
 using Repositories.Contracts;
@@ -11,8 +12,14 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddDbContext<RepositoryContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("sqlconnection"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("sqlconnection"),
+        
+        b=>b.MigrationsAssembly("StoreApp"));
 });
+
+
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession();
 
 //IOC
 builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
@@ -23,11 +30,14 @@ builder.Services.AddScoped<IServiceManager, ServiceManager>();
 builder.Services.AddScoped<ICategoryService, CategoryManager>();
 builder.Services.AddScoped<IProductService, ProductManager>();
 
+builder.Services.AddSingleton<Cart>();
+
 builder.Services.AddAutoMapper(typeof(Program));
 
 var app = builder.Build();
 
 app.UseStaticFiles();
+app.UseSession();
 app.UseHttpsRedirection();
 app.UseRouting();
 

@@ -9,9 +9,10 @@ namespace StoreApp.Pages
     {
         private readonly IServiceManager _manager;
 
-        public CartModel(IServiceManager manager)
+        public CartModel(IServiceManager manager, Cart cart)
         {
             _manager = manager;
+            Cart = cart;
         }
 
         public Cart Cart { get; set; }
