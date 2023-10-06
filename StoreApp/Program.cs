@@ -37,5 +37,7 @@ app.UseEndpoints(endpoints =>
 
     endpoints.MapRazorPages();
 });
+//Otomatik migraiton iþlemi
+app.ConfigureAndCheckMigration();
 
 app.Run();
