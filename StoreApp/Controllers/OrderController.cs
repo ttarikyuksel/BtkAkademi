@@ -10,7 +10,7 @@ namespace StoreApp.Controllers
         private readonly IServiceManager _manager;
         private readonly Cart _cart;
 
-        public OrderController(IServiceManager manager, Cart cart) : this(manager)
+        public OrderController(IServiceManager manager, Cart cart) 
         {
             _cart = cart;
         }
