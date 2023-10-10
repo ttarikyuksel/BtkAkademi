@@ -19,6 +19,7 @@
     </div>
     <footer>
         @RenderSection("Footer",false)
+        <partial name="_Footer" />
     </footer>
     @await RenderSectionAsync("Scripts",required:false)
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
