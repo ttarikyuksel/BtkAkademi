@@ -29,7 +29,7 @@ namespace StoreApp.Controllers
                 if (user is not null)
                 {
                     await _singInManager.SignOutAsync();
-                    if((await _singInManager.PasswordSignInAsync(user, model.Password, false, false)).Succeeded{
+                    if((await _singInManager.PasswordSignInAsync(user, model.Password, false, false)).Succeeded){
                         return Redirect(model?.ReturnUrl ?? "/");
                     }                                                
                 }
