@@ -6,18 +6,18 @@ namespace StoreApp.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize(Roles = "Admin")]
-    public class CategoryController : Controller
+    public class RoleController : Controller
     {
         private readonly IServiceManager _manager;
 
-        public CategoryController(IServiceManager manager)
+        public RoleController(IServiceManager manager)
         {
             _manager = manager;
         }
 
-        /*public IActionResult Index()
+        public IActionResult Index()
         {
-            return View(_manager.CategoryService.GetAllCategories(false));
-        }*/
+            return View(_manager.AuthService.Roles);
+        }
     }
 }
